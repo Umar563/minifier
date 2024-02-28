@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import ".//App.css"
 
 function App() {
   const [longURL, setLongURL] = useState('');
@@ -24,7 +25,7 @@ function App() {
       // Update Tiny URL state
       setTinyURL(newTinyURL);
 
-      // Fetch updated last ten generated URLs from the backend
+    // Fetch updated last ten generated URLs from the backends
       const lastTenResponse = await axios.get('http://localhost:3001/api/lastTenURLs');
       const updatedLastTenURLs = lastTenResponse.data.lastTenURLs;
 
@@ -39,6 +40,7 @@ function App() {
   };
 
   return (
+    <div className="app-parent">
     <div className="App">
       <h1>Tiny URL Generator</h1>
       <form onSubmit={handleSubmit}>
@@ -58,7 +60,7 @@ function App() {
         </div>
       )}
       {lastTenURLs.length > 0 && (
-        <div>
+        <div className='generated-url'>
           <h2>Last Ten Generated URLs:</h2>
           <ul>
             {lastTenURLs.map((url, index) => (
@@ -67,6 +69,7 @@ function App() {
           </ul>
         </div>
       )}
+    </div>
     </div>
   );
 }
